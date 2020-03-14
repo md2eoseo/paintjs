@@ -1,6 +1,8 @@
 const canvas = document.querySelector("#jsCanvas");
 const ctx = canvas.getContext("2d");
 
+const colors = document.querySelectorAll("#jsColor");
+
 // pixel modifier에 size 지정해야 그릴 수 있음
 // css에 size 지정하는건 보여지는 element의 크기임
 canvas.width = 700;
@@ -32,9 +34,15 @@ function onMouseMove(e) {
   }
 }
 
+function handleColor(e) {
+  const color = e.target.style.backgroundColor;
+  ctx.strokeStyle = color;
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
+  colors.forEach(color => color.addEventListener("click", handleColor));
 }
